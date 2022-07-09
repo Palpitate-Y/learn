@@ -49,6 +49,13 @@ nums的每个元素都将在[-9999, 9999]之间。
         return -1;
     }
 
+    public static void main(String[] args) {
+        ErFen erFen = new ErFen();
+        int nums[] = new int[]{3, 5, 3, 2, 0};
+        //System.out.println(erFen.search(nums, 2));
+        System.out.println(erFen.peakIndexInMountainArray(nums));
+    }
+
     /*
     x 的平方根
     给你一个非负整数 x ，计算并返回x的 算术平方根 。
@@ -70,42 +77,166 @@ nums的每个元素都将在[-9999, 9999]之间。
     0 <= x <= 231 - 1
     */
     public int mySqrt(int x) {
-    //取x的一半 如果x/2 * x/2==x 返回 否则 -1 再平方
-    //如果x/2-1 * x/2-1 >x 且 x/2-2 * x/2-2<x 则返回x-2
-        int left=0;
-        int result=-1;
-        int right=x;
-        while (left <= right){
-            int mid=(right-left)/2+left;
+        //取x的一半 如果x/2 * x/2==x 返回 否则 -1 再平方
+        //如果x/2-1 * x/2-1 >x 且 x/2-2 * x/2-2<x 则返回x-2
+        int left = 0;
+        int result = -1;
+        int right = x;
+        while (left <= right) {
+            int mid = (right - left) / 2 + left;
             //如果mid的平方小于x 向上查找 如果 等于或者大于向下查找
-            if ((long)mid*mid<=x) {
-                result=mid;
-                left=mid+1;
-            }else {
-                right=mid-1;
+            if ((long) mid * mid <= x) {
+                result = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
             }
         }
         return result;
     }
+/*
+374. 猜数字大小
+猜数字游戏的规则如下：
+
+每轮游戏，我都会从 1 到 n 随机选择一个数字。 请你猜选出的是哪个数字。
+如果你猜错了，我会告诉你，你猜测的数字比我选出的数字是大了还是小了。
+你可以通过调用一个预先定义好的接口 int guess(int num) 来获取猜测结果，返回值一共有 3 种可能的情况（-1，1 或 0）：
+
+-1：我选出的数字比你猜的数字小 pick < num
+1：我选出的数字比你猜的数字大 pick > num
+0：我选出的数字和你猜的数字一样。恭喜！你猜对了！pick == num
+返回我选出的数字。
+
+示例 1：
+输入：n = 10, pick = 6
+输出：6
+示例 2：
+
+输入：n = 1, pick = 1
+输出：1
+示例 3：
+
+输入：n = 2, pick = 1
+输出：1
+示例 4：
+
+输入：n = 2, pick = 2
+输出：2
+
+提示：
+1 <= n <= 231 - 1
+1 <= pick <= n
+*/
+
     public int mySqrt2(int x) {
         //取x的一半 如果x/2 * x/2==x 返回 否则 -1 再平方
         //如果x/2-1 * x/2-1 >x 且 x/2-2 * x/2-2<x 则返回x-2
-        int left=0;
-        int right=x;
-        while (left<=right){
-            int mid=(right-left)/2+left;
-            long temp= (long) mid *mid;
-            if (temp<x) left=mid+1;
-            else if (temp>x) right=mid-1;
-            else if (temp==x) return mid;
+        int left = 0;
+        int right = x;
+        while (left <= right) {
+            int mid = (right - left) / 2 + left;
+            long temp = (long) mid * mid;
+            if (temp < x) left = mid + 1;
+            else if (temp > x) right = mid - 1;
+            else if (temp == x) return mid;
         }
         return right;
     }
 
+    /*35. 搜索插入位置
+    给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
 
-    public static void main(String[] args) {
-        ErFen erFen = new ErFen();
-        int nums[] = {-1, 0, 3, 5, 9, 12};
-        System.out.println(erFen.search(nums, 2));
+    请必须使用时间复杂度为 O(log n) 的算法。
+
+
+
+    示例 1:
+
+    输入: nums = [1,3,5,6], target = 5
+    输出: 2
+    示例 2:
+
+    输入: nums = [1,3,5,6], target = 2
+    输出: 1
+    示例 3:
+
+    输入: nums = [1,3,5,6], target = 7
+    输出: 4
+
+
+    提示:
+
+    1 <= nums.length <= 104
+    -104 <= nums[i] <= 104
+    nums 为 无重复元素 的 升序 排列数组
+    -104 <= target <= 104
+    */
+    public int searchInsert(int[] nums, int target) {
+        //不在就插入，在就返回
+        int left = 0, right = nums.length - 1;
+        while (left <= right) {
+            int mid = (right - left) / 2 + left;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                right = mid - 1;
+            } else if (nums[mid] == target) {
+                return mid;
+            }
+        }
+        return right + 1;
+    }
+
+    /*852. 山脉数组的峰顶索引
+    符合下列属性的数组 arr 称为 山脉数组 ：
+    arr.length >= 3
+    存在 i（0 < i < arr.length - 1）使得：
+    arr[0] < arr[1] < ... arr[i-1] < arr[i]
+    arr[i] > arr[i+1] > ... > arr[arr.length - 1]
+    给你由整数组成的山脉数组 arr ，返回任何满足 arr[0] < arr[1] < ... arr[i - 1] < arr[i] > arr[i + 1] > ... > arr[arr.length - 1] 的下标 i 。
+
+
+
+    示例 1：
+
+    输入：arr = [0,1,0]
+    输出：1
+    示例 2：
+
+    输入：arr = [0,2,1,0]
+    输出：1
+    示例 3：
+
+    输入：arr = [0,10,5,2]
+    输出：1
+    示例 4：
+
+    输入：arr = [3,4,5,1]
+    输出：2
+    示例 5：
+
+    输入：arr = [24,69,100,99,79,78,67,36,26,19]
+    输出：2
+
+
+    提示：
+
+    3 <= arr.length <= 104
+    0 <= arr[i] <= 106
+    题目数据保证 arr 是一个山脉数组
+
+
+    进阶：很容易想到时间复杂度 O(n) 的解决方案，你可以设计一个 O(log(n)) 的解决方案吗？*/
+    public int peakIndexInMountainArray(int[] arr) {
+        int left = 0, right = arr.length - 1;
+        while (left <= right) {
+            int mid = (right - left) / 2 + left;
+            if (arr[mid] < arr[mid + 1]) {
+                left = mid + 1;
+            } else if (arr[mid] > arr[mid + 1]) {
+                right = mid - 1;
+            }
+        }
+        return right;
     }
 }
