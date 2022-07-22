@@ -1,3 +1,5 @@
+package lesson1稀疏数组;
+
 /**
  * @author Palpitate Yzr
  */
@@ -18,8 +20,10 @@ public class SparseArrayUtil {
 
 
     public static boolean shouldConvert(final int[][] sourceArray,final int defaultValue){
+        //自身所占地址空间+数组所占地址空间
         int srcSpaceCount= sourceArray.length*sourceArray[0].length+ sourceArray.length;
         int effValueCount=SparseArrayUtil.getEffValueCount(sourceArray,defaultValue);
+
         int num2=3+effValueCount*3+(effValueCount+1);
         return num2<srcSpaceCount;
     }

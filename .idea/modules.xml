@@ -4,7 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LeetCode/LeetCode.iml" filepath="$PROJECT_DIR$/LeetCode/LeetCode.iml" />
       <module fileurl="file://$PROJECT_DIR$/数据结构/数据结构.iml" filepath="$PROJECT_DIR$/数据结构/数据结构.iml" />
+      <module fileurl="file://$PROJECT_DIR$/数据结构/稀疏数组/稀疏数组.iml" filepath="$PROJECT_DIR$/数据结构/稀疏数组/稀疏数组.iml" />
       <module fileurl="file://$PROJECT_DIR$/算法.iml" filepath="$PROJECT_DIR$/算法.iml" />
+      <module fileurl="file://$PROJECT_DIR$/数据结构/链表/链表与队列.iml" filepath="$PROJECT_DIR$/数据结构/链表/链表与队列.iml" />
+      <module fileurl="file://$PROJECT_DIR$/数据结构/队列/队列.iml" filepath="$PROJECT_DIR$/数据结构/队列/队列.iml" />
     </modules>
   </component>
 </project>

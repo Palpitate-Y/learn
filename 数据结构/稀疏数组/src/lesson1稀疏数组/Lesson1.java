@@ -1,3 +1,5 @@
+package lesson1稀疏数组;
+
 /**
  * @author Palpitate Yzr
  */
